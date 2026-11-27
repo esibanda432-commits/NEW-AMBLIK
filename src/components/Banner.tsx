@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { PanelId } from '../data/content';
 import WebCanvas from './WebCanvas';
-const logoDark = '/brand/amblik-wordmark.svg';
+const logoDark = '/brand/amblik-wordmark-reverse.svg';
 
 const menu: { id: PanelId; label: string; short: string }[] = [
   { id: 'how', label: 'How It Works', short: 'How' },
@@ -190,7 +190,8 @@ export default function Banner({ onOpen }: { onOpen: (id: PanelId) => void }) {
       <div className="web-wrap" aria-hidden="true"><WebCanvas /></div>
       <div className="veil" aria-hidden="true" />
       <figure className="hero-art" aria-hidden="true">
-        <img src="/brand/spider-field.jpg" alt="" draggable={false} />
+        <img className="art-main" src="/brand/spider-field.jpg" alt="" draggable={false} />
+        <img className="art-side" src="/brand/spider-hero.jpg" alt="" draggable={false} />
         <figcaption><i />The Traveling Strategist</figcaption>
       </figure>
 

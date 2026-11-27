@@ -1,7 +1,34 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { aiReply, greeting, localReply, suggestions, type Action, type Reply } from '../data/assistant';
 import type { PanelId } from '../data/content';
-const glyph = '/brand/amblik-glyph-reverse.svg';
+const glyph = '/brand/spider-hero.jpg';
+
+// The business journey from the brand board: Audience > Signal > Account > Human decision > Sales action.
+const journey = [
+  { label: 'Audience', note: 'Who you need to reach', c: '#3EC7CF' },
+  { label: 'Signal', note: 'What the campaign tells you', c: '#7846E8' },
+  { label: 'Account', note: 'A qualified opportunity', c: '#A044A5' },
+  { label: 'Human decision', note: 'Your team stays in control', c: '#D7A24D' },
+  { label: 'Sales action', note: 'The call that matters', c: '#FF3B1F' },
+];
+
+// Faint network pattern behind the stage: connected paths and nodes in the brand palette.
+function NetBackdrop() {
+  return (
+    <svg className="silk-net" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="none" strokeWidth="1.4" strokeLinejoin="round">
+        <polyline points="0,300 160,240 300,280 470,190 640,230 800,140 980,190 1200,110" stroke="#3EC7CF" opacity=".5" />
+        <polyline points="0,120 140,170 330,100 520,150 700,80 900,120 1060,60 1200,90" stroke="#7846E8" opacity=".45" />
+        <polyline points="0,370 220,330 420,360 640,320 860,350 1040,300 1200,330" stroke="#D7A24D" opacity=".35" />
+        <polyline points="300,280 330,100 470,190 520,150" stroke="#A044A5" opacity=".35" />
+        <polyline points="800,140 700,80 640,230" stroke="#3EC7CF" opacity=".3" />
+      </g>
+      {[[160,240,'#3EC7CF'],[470,190,'#3EC7CF'],[800,140,'#FF3B1F'],[980,190,'#3EC7CF'],[330,100,'#7846E8'],[700,80,'#7846E8'],[1060,60,'#A044A5'],[420,360,'#D7A24D'],[860,350,'#D7A24D'],[520,150,'#FFFFFF']].map(([x, y, c], i) => (
+        <g key={i}><circle cx={x as number} cy={y as number} r="9" fill={c as string} opacity=".16" /><circle cx={x as number} cy={y as number} r="3.6" fill={c as string} /></g>
+      ))}
+    </svg>
+  );
+}
 
 interface Msg { id: number; role: 'user' | 'assistant'; text: string; actions?: Action[]; typing?: boolean }
 
@@ -67,6 +94,21 @@ export default function Assistant({ onOpen }: { onOpen: (id: PanelId) => void })
 
   return (
     <section className="silk" aria-label="Ask Ämblik">
+      <NetBackdrop />
+
+      <aside className="rail rail-l" aria-label="The Ämblik business journey">
+        <p className="rail-kicker"><i />The business journey</p>
+        <ol className="journey">
+          {journey.map((j, i) => (
+            <li key={j.label} style={{ '--c': j.c } as React.CSSProperties}>
+              <span className="j-node"><b>{i + 1}</b></span>
+              <span className="j-text"><strong>{j.label}</strong><em>{j.note}</em></span>
+            </li>
+          ))}
+        </ol>
+        <p className="rail-foot">A campaign signal informs a qualified opportunity and a human sales decision.</p>
+      </aside>
+
       <div className="silk-inner">
         <div className="silk-head">
           <span className={`silk-mark ${busy ? 'is-busy' : ''}`} aria-hidden="true"><img src={glyph} alt="" /></span>
@@ -106,6 +148,22 @@ export default function Assistant({ onOpen }: { onOpen: (id: PanelId) => void })
           </button>
         </form>
       </div>
+
+      <aside className="rail rail-r" aria-label="Ämblik at a glance">
+        <figure className="r-photo">
+          <img src="/brand/spider-laptop.jpg" alt="" draggable={false} />
+          <figcaption><b>Know the audience.<br />Shape the message.<br />Choose the channels.</b></figcaption>
+        </figure>
+        <div className="r-card r-hub">
+          <p className="rail-kicker"><i />Insight</p>
+          <h3>Turn signals<br />into strategy.</h3>
+          <p>Unify data, decisions, and action with ÄMBLIK.</p>
+          <span className="r-bar" aria-hidden="true"><i /><i /><i /><i /></span>
+        </div>
+        <div className="r-card r-eval">
+          <strong>Explore.</strong><strong>Evaluate.</strong><strong>Act.</strong>
+        </div>
+      </aside>
     </section>
   );
 }

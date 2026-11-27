@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { company, panelById, type PanelId } from '../data/content';
 
+const art: Record<string, string> = { demand: 'spider-field', campaigns: 'spider-pack', leads: 'spider-laptop', crm: 'spider-hero', how: 'spider-field', who: 'spider-pack', about: 'spider-hero', call: 'spider-laptop' };
+
 export default function Sheet({ id, onClose }: { id: PanelId | null; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const [shown, setShown] = useState<PanelId | null>(id);
@@ -28,6 +30,7 @@ export default function Sheet({ id, onClose }: { id: PanelId | null; onClose: ()
       <aside className="sheet" role="dialog" aria-modal="true" aria-label={panel?.label}>
         {panel && (
           <>
+            <img className="sheet-art" src={`/brand/${art[panel.id]}.jpg`} alt="" />
             <div className="sheet-head">
               <p className="kicker">{panel.label}</p>
               <button ref={closeRef} type="button" className="sheet-close" onClick={onClose} aria-label="Close">×</button>

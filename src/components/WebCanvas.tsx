@@ -3,8 +3,8 @@ import { useEffect, useRef } from 'react';
 // Purposeful connection geometry: a small number of meaningful nodes and paths.
 // This is a workflow/network motif, not a literal spider web.
 // Brand palette: turquoise / deep teal paths, with violet, orchid and gold as node accents.
-const EDGE = ['rgba(62,199,207,.7)','rgba(16,36,55,.22)','rgba(14,92,89,.5)','rgba(16,36,55,.22)','rgba(120,70,232,.4)'];
-const NODE = ['#102437','#D7A24D','#7846E8','#A044A5','#0E5C59'];
+const EDGE = ['rgba(62,199,207,.75)','rgba(255,255,255,.18)','rgba(120,70,232,.6)','rgba(255,255,255,.18)','rgba(160,68,165,.55)'];
+const NODE = ['#FFFFFF','#D7A24D','#7846E8','#A044A5','#3EC7CF'];
 export default function WebCanvas() {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
