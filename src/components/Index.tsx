@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { panels, type PanelId } from '../data/content';
+import BigIcon from './BigIcon';
 
 const N = panels.length;
 
@@ -116,6 +117,7 @@ export default function Index({ onOpen }: { onOpen: (id: PanelId) => void }) {
               if (i === active) onOpen(p.id); else select(i);
             }}
           >
+            <BigIcon id={p.id} />
             <span className="ix-num">{String(i + 1).padStart(2, '0')}</span>
             <span className="ix-label">{p.label}</span>
             <span className="ix-teaser">{p.teaser}</span>
